@@ -1,5 +1,6 @@
 <?php
 require_once("../db_connect.php");
+session_start();
 
 $id=$_GET["id"];
 $sql="DELETE FROM teacher WHERE id = ?";

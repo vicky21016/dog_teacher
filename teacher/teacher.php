@@ -35,10 +35,16 @@ $row = $result->fetch_assoc();
         name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <?php include("../css.php") ?>
+    <style>
+        .images {
+            max-width: 100% ;
+            width: 500px;
+            height: auto;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- <?php include("../header.php") ?> -->
     <div class="container">
         <div class="py-2">
             <a href="List.php" class="btn btn-primary" title="回師資列表"><i class="fa-solid fa-left-long"></i></a>
@@ -59,7 +65,7 @@ $row = $result->fetch_assoc();
             <div class="row g-3">
                 <?php if ($result->num_rows > 0): ?>
                     <div class="col-lg-6">
-                        <img class="img-fluid" src="/img/<?= $row["img"] ?>" alt="<?= $row["name"] ?>">
+                        <img class="img-fluid images" src="../img/<?= $row["img"] ?>" alt="<?= $row["name"] ?>">
                     </div>
                     <div class="col-lg-6">
 
@@ -71,10 +77,10 @@ $row = $result->fetch_assoc();
 
                             <div class="ms-auto">
                                 <a href="doEdit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm mb-3">
-                                    <i class="fa-solid fa-pencil-alt"></i> 編輯
+                                    <i class="fa-solid fa-pen-to-square fa-fw"></i>
                                 </a>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<?= $row['id'] ?>">
-                                    <i class="fa-solid fa-trash"></i> 刪除
+                                    <i class="fa-solid fa-trash"></i>
                                 </button>
                             </div>
                         </div>
