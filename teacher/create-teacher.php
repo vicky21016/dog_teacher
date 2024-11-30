@@ -27,6 +27,7 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
+<?php include("style.php"); ?>
     <?php
     if (isset($_SESSION['error'])) {
         echo '<div style="color: red; font-weight: bold; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; margin-bottom: 15px;">';

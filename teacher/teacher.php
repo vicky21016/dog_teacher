@@ -25,116 +25,134 @@ $row = $result->fetch_assoc();
 
 ?>
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
 
 <head>
     <title>老師詳細資料</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php include("../css.php") ?>
     <style>
-        .images {
-            max-width: 100% ;
-            width: 500px;
-            height: auto;
+        body {
+            background-color: #f5f5f5;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .container {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%; 
+        }
+
+        .teacher-image {
+            width: 100%;
+            max-width: 450px;
+            height: 600px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .teacher-info h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .teacher-info p {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .btn {
+            border-radius: 5px;
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
+<?php include("style.php"); ?>
+    <div class="container mt-5">
         <div class="py-2">
-            <a href="List.php" class="btn btn-primary" title="回師資列表"><i class="fa-solid fa-left-long"></i></a>
+            <a href="List.php" class="btn btn-primary" title="回師資列表">
+                <i class="fa-solid fa-left-long"></i>
+            </a>
         </div>
-        <ul class="nav nav-underline mb-3">
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="List.php">全部</a>
-            </li>
-            <?php foreach ($categories as $category): ?>
-                <li class="nav-item">
-                    <a class="nav-link 
-                    <?php if ($category["id"] == $row["category_id"]) echo "active"; ?>" href="List.php?category=<?= $category["id"] ?>"><?= $category["name"] ?>
-                    </a>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-        <div class="py-2">
-            <div class="row g-3">
-                <?php if ($result->num_rows > 0): ?>
-                    <div class="col-lg-6">
-                        <img class="img-fluid images" src="../img/<?= $row["img"] ?>" alt="<?= $row["name"] ?>">
-                    </div>
-                    <div class="col-lg-6">
 
-                        <div class="d-flex justify-content-between">
+        <div class="row">
+            <?php if ($result->num_rows > 0): ?>
+                <!-- 圖片區 -->
+                <div class="col-md-6 image-container">
+                    <img class="teacher-image" src="../img/<?= htmlspecialchars($row['img']) ?>" alt="<?= htmlspecialchars($row['name']) ?>">
+                </div>
 
-                            <a href="List.php?category=<?= $row["category_id"] ?>">
-                                <?= $categoryArr[$row["category_id"]] ?>
+                <!-- 資訊區 -->
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1><?= htmlspecialchars($row['name']) ?></h1>
+                        <div class="header-buttons mt-2">
+                            <a href="doEdit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-
-                            <div class="ms-auto">
-                                <a href="doEdit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm mb-3">
-                                    <i class="fa-solid fa-pen-to-square fa-fw"></i>
-                                </a>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<?= $row['id'] ?>">
-                                    <i class="fa-solid fa-trash"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">刪除確認</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        確定要刪除這位老師嗎？
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
-                                        <a id="deleteButton" href="#" class="btn btn-danger">確認刪除</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <h1><?= $row["name"] ?></h1>
-                        <div>
-                            <h3>簡介：</h3>
-                            <p><?= nl2br(htmlspecialchars($row["Introduce"])) ?></p>
-                        </div>
-                        <div>
-                            <h3>專長：</h3>
-                            <p><?= nl2br(htmlspecialchars($row["skill"])) ?></p>
-                        </div>
-                        <div>
-                            <h3>經歷：</h3>
-                            <p><?= nl2br(htmlspecialchars($row["Experience"])) ?></p>
                         </div>
                     </div>
+                    <a class="category-link" href="List.php?category=<?= $row['category_id'] ?>">
+                        <?= htmlspecialchars($categoryArr[$row['category_id']]) ?>
+                    </a>
 
-                <?php else: ?>
-                    <p>老師資料不存在。</p>
-                <?php endif; ?>
+                    <div class="teacher-info mt-4">
+                        <h3>簡介</h3>
+                        <p><?= nl2br(htmlspecialchars($row['Introduce'])) ?></p>
+
+                        <h3>專長</h3>
+                        <p><?= nl2br(htmlspecialchars($row['skill'])) ?></p>
+
+                        <h3>經歷</h3>
+                        <p><?= nl2br(htmlspecialchars($row['Experience'])) ?></p>
+                    </div>
+                </div>
+            <?php else: ?>
+                <p class="text-center text-muted py-5">老師資料不存在。</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <!-- 刪除確認模態框 -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">刪除確認</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    確定要刪除這位老師嗎？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <a id="deleteButton" href="#" class="btn btn-danger">確認刪除</a>
+                </div>
             </div>
         </div>
     </div>
-    <?php include("../js.php"); ?>
+
+    <?php include("../js.php") ?>
     <script>
         // 設定刪除按鈕的連結
         const deleteButton = document.getElementById('deleteButton');
         const modal = document.getElementById('exampleModal');
-        // 當打開模態框時，設置刪除的連結
+
         modal.addEventListener('show.bs.modal', function(event) {
-            // 取得點擊刪除按鈕時的 teacher id
-            const button = event.relatedTarget; // 按鈕
-            const teacherId = button.getAttribute('data-id'); // 取得 data-id 屬性
-            deleteButton.href = 'doDelete.php?id=' + teacherId; // 設定刪除連結
+            const button = event.relatedTarget;
+            const teacherId = button.getAttribute('data-id');
+            deleteButton.href = 'doDelete.php?id=' + teacherId;
         });
     </script>
 </body>

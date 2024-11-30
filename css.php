@@ -28,7 +28,7 @@
 
     table td:nth-child(1),
     table th:nth-child(1) {
-        min-width: 50px;
+        min-width: 70px;
         max-width: 200px;
         word-break: break-word;
         /* 自動換行 */
