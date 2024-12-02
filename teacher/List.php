@@ -64,7 +64,8 @@ $totalPages = ceil($totalTeachers / $limit);
 
 $sql = "SELECT teacher.*, category.name AS category_name FROM teacher 
 JOIN category ON teacher.category_id = category.id
-$whereClause ORDER BY $sort_column $order 
+$whereClause AND teacher.is_deleted = 0 
+ORDER BY $sort_column $order 
 LIMIT ?, ?
 ";
 //$sql = "SELECT * FROM teacher 
