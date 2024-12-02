@@ -1,6 +1,5 @@
 <?php
 include("../css.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,7 +51,11 @@ include("../css.php");
                     <i class="fa-solid fa-user pe-2 ps-1"></i>course
                 </a>
             </li>
+<<<<<<< HEAD
             <li><a class="py-2 px-3 text-decoration-none d-block" href="List.php">
+=======
+            <li><a class="py-2 px-3 text-decoration-none d-block" href="">
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
                     <i class="fa-solid fa-user pe-2 ps-1"></i>teacher
                 </a>
             </li>

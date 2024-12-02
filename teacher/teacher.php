@@ -41,6 +41,7 @@ $row = $result->fetch_assoc();
         .container {
             background: #fff;
             border-radius: 8px;
+<<<<<<< HEAD
             padding: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             /* max-height: 900px; */
@@ -49,11 +50,20 @@ $row = $result->fetch_assoc();
             width: 100%;
         }
 
+=======
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
         .image-container {
             display: flex;
             justify-content: center;
             align-items: center;
+<<<<<<< HEAD
             height: 100%;
+=======
+            height: 100%; 
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
         }
 
         .teacher-image {
@@ -83,7 +93,11 @@ $row = $result->fetch_assoc();
 </head>
 
 <body>
+<<<<<<< HEAD
     <?php include("style.php"); ?>
+=======
+<?php include("style.php"); ?>
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
     <div class="container mt-5">
         <div class="py-2">
             <a href="List.php" class="btn btn-primary" title="回師資列表">
@@ -91,7 +105,11 @@ $row = $result->fetch_assoc();
             </a>
         </div>
 
+<<<<<<< HEAD
         <div class="row ">
+=======
+        <div class="row">
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
             <?php if ($result->num_rows > 0): ?>
                 <!-- 圖片區 -->
                 <div class="col-md-6 image-container">
@@ -99,11 +117,19 @@ $row = $result->fetch_assoc();
                 </div>
 
                 <!-- 資訊區 -->
+<<<<<<< HEAD
                 <div class="col-md-6 ">
                     <div class="d-flex justify-content-between align-items-center">
                         <h1><?= htmlspecialchars($row['name']) ?></h1>
                         <div class="header-buttons mt-2">
                             <a href="doEdit.php?id=<?= $row['id'] ?>" class="btn btn-warning">
+=======
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h1><?= htmlspecialchars($row['name']) ?></h1>
+                        <div class="header-buttons mt-2">
+                            <a href="doEdit.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm">
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                         </div>

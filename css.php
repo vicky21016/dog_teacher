@@ -29,7 +29,11 @@
 
     table td:nth-child(1),
     table th:nth-child(1) {
+<<<<<<< HEAD
         min-width: 80px;
+=======
+        min-width: 70px;
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
         max-width: 200px;
         word-break: break-word;
         /* 自動換行 */

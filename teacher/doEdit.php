@@ -40,7 +40,11 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+<<<<<<< HEAD
     <?php include("style.php"); ?>
+=======
+<?php include("style.php"); ?>
+>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
     <?php
     // 顯示錯誤訊息（警告）
     // if (isset($_SESSION['error'])) {
