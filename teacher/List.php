@@ -1,6 +1,6 @@
 <?php
 require_once("../db_connect.php");
-// session_start();
+session_start();
 
 $cateSql = "SELECT * FROM category";
 $resultCate = $conn->query($cateSql);
@@ -104,25 +104,23 @@ $stmt->close();
 </head>
 
 <body>
-    <<<<<<< HEAD
-        <?php include("style.php"); ?>
-        <?php
-        if (isset($_SESSION['success'])) {
-            echo '<div style="color: green; font-weight: bold; padding: 10px; background-color:#d4edda; border: 1px solid #c3e6cb; border-radius: 5px; z-index: 10; margin-top: -45px; margin-left: 240px;">';
-            echo $_SESSION['success'];
-            echo '</div>';
-            unset($_SESSION['success']);
-        }
-        ?>=======<?php include("style.php"); ?>>>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
-        <div class="container">
-            <a href="List.php">
-                <h1>List</h1>
-            </a>
-            <div class="d-flex justify-content-between">
-                <<<<<<< HEAD
-                    <div class="py-2">
-                    共 <?= $totalTeachers ?> 位老師，
-                    目前在第 <?= $page ?> 頁，共 <?= $totalPages ?> 頁。
+    <?php include("style.php"); ?>
+    <?php
+    if (isset($_SESSION['success'])) {
+        echo '<div style="color: green; font-weight: bold; padding: 10px; background-color:#d4edda; border: 1px solid #c3e6cb; border-radius: 5px; z-index: 10; margin-top: -45px; margin-left: 240px;">';
+        echo $_SESSION['success'];
+        echo '</div>';
+        unset($_SESSION['success']);
+    }
+    ?>
+    <div class="container">
+        <a href="List.php">
+            <h1>List</h1>
+        </a>
+        <div class="d-flex justify-content-between">
+            <div class="py-2">
+                共 <?= $totalTeachers ?> 位老師，
+                目前在第 <?= $page ?> 頁，共 <?= $totalPages ?> 頁。
             </div>
 
             <div class="py-3 text-end col-md-auto">
@@ -135,18 +133,6 @@ $stmt->close();
                 <i class="fa-solid fa-left-long"></i>
             </a>
         <?php endif; ?>
-
-        =======
-        <div class="py-2">
-            共 <?= $totalTeachers ?> 位老師，
-            目前在第 <?= $page ?> 頁，共 <?= $totalPages ?> 頁。
-        </div>
-
-        <div class="py-3 text-end col-md-auto">
-            <a href="create-teacher.php" class="btn btn-primary "><i class="fa-solid fa-plus"></i> 新增老師</a>
-        </div>
-        </div>
-        >>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
         <?php if ($teacherCount > 0): ?>
             <div class="table-container">
                 <table class='table table-responsive'>
@@ -158,21 +144,17 @@ $stmt->close();
                                 <?php endif; ?>
                             </th>
                             <th>照片</th>
-                            <<<<<<< HEAD
-                                <th style="cursor: pointer;" onclick="window.location.href='List.php?sort_column=name&order=<?= $order === 'ASC' ? 'DESC' : 'ASC'; ?>&page=<?= $page ?>&search=<?= htmlspecialchars($search) ?>'">姓名
-                                =======
-                                <th style="cursor: pointer;" onclick="window.location.href='List.php?sort_column=name&order=<?= $order === 'ASC' ? 'DESC' : 'ASC'; ?>&page=<?= $page ?>&search=<?= htmlspecialchars($search) ?>'">姓名
-                                    >>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
-                                    <?php if ($sort_column == 'name'): ?>
-                                        <i class="fa-solid fa-caret-<?= $order === 'DESC' ? 'up' : 'down'; ?>"></i>
-                                    <?php endif; ?>
-                                </th>
+                            <th style="cursor: pointer;" onclick="window.location.href='List.php?sort_column=name&order=<?= $order === 'ASC' ? 'DESC' : 'ASC'; ?>&page=<?= $page ?>&search=<?= htmlspecialchars($search) ?>'">姓名
+                                <?php if ($sort_column == 'name'): ?>
+                                    <i class="fa-solid fa-caret-<?= $order === 'DESC' ? 'up' : 'down'; ?>"></i>
+                                <?php endif; ?>
+                            </th>
 
-                                <th>類別</th>
-                                <th>專長</th>
-                                <th>介紹</th>
-                                <th>經驗</th>
-                                <th>其他</th>
+                            <th>類別</th>
+                            <th>專長</th>
+                            <th>介紹</th>
+                            <th>經驗</th>
+                            <th>其他</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -203,31 +185,29 @@ $stmt->close();
                                     <a href="doEdit.php?id=<?= $teacher['id'] ?>" class="btn btn-warning btn-sm mb-3">
                                         <i class="fa-solid fa-pen-to-square fa-fw"> </i>
                                     </a>
-                                    <<<<<<< HEAD
-                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"=======<button type="button" class="btn btn-danger" data-bs-toggle="modal">>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
-                                        data-bs-target="#exampleModal" data-id="<?= $teacher['id'] ?>">
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<?= $teacher['id'] ?>">
                                         <i class="fa-solid fa-trash fa-fw"> </i>
-                                        </button>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">刪除確認</h1>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        確定要刪除這位老師嗎？
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">取消</button>
-                                                        <a id="deleteButton" href="#" class="btn btn-danger">確認刪除</a>
-                                                    </div>
+                                    </button>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">刪除確認</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    確定要刪除這位老師嗎？
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">取消</button>
+                                                    <a id="deleteButton" href="#" class="btn btn-danger">確認刪除</a>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -248,28 +228,28 @@ me-2"><?= $i ?></a>
                     <a href="?page=<?= $totalPages ?>&search=<?= htmlspecialchars($search) ?>&category=<?= htmlspecialchars($_GET['category'] ?? '') ?>" class="btn btn-primary">最後 一頁</a>
                 <?php endif; ?>
             </div>
-            </div>
-        <?php else:
-        ?>
-            <p>找不到符合條件的老師。</p>
-        <?php endif;
-        ?>
+    </div>
+<?php else:
+?>
+    <p>找不到符合條件的老師。</p>
+<?php endif;
+?>
 
-        </div>
-        <?php include("../js.php"); ?>
-        <script>
-            // 設定刪除按鈕的連結
-            const deleteButton = document.getElementById('deleteButton');
-            const modal = document.getElementById('exampleModal');
+</div>
+<?php include("../js.php"); ?>
+<script>
+    // 設定刪除按鈕的連結
+    const deleteButton = document.getElementById('deleteButton');
+    const modal = document.getElementById('exampleModal');
 
-            // 當打開模態框時，設置刪除的連結
-            modal.addEventListener('show.bs.modal', function(event) {
-                // 取得點擊刪除按鈕時的 teacher id
-                const button = event.relatedTarget; // 按鈕
-                const teacherId = button.getAttribute('data-id'); // 取得 data-id 屬性
-                deleteButton.href = 'doDelete.php?id=' + teacherId; // 設定刪除連結
-            });
-        </script>
+    // 當打開模態框時，設置刪除的連結
+    modal.addEventListener('show.bs.modal', function(event) {
+        // 取得點擊刪除按鈕時的 teacher id
+        const button = event.relatedTarget; // 按鈕
+        const teacherId = button.getAttribute('data-id'); // 取得 data-id 屬性
+        deleteButton.href = 'doDelete.php?id=' + teacherId; // 設定刪除連結
+    });
+</script>
 </body>
 
 </html>

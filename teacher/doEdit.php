@@ -40,11 +40,7 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
-<<<<<<< HEAD
     <?php include("style.php"); ?>
-=======
-<?php include("style.php"); ?>
->>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
     <?php
     // 顯示錯誤訊息（警告）
     // if (isset($_SESSION['error'])) {
@@ -61,12 +57,12 @@ if (isset($_GET['id'])) {
         echo '</div>';
         unset($_SESSION['error']);  // 顯示後清除錯誤訊息
     }
-    if (isset($_SESSION['success'])) {
-        echo '<div style="color: green; font-weight: bold; padding: 10px; background-color:#d4edda; border: 1px solid #c3e6cb; border-radius: 5px; z-index: 10; margin-top: -45px; margin-left: 240px;">';
-        echo $_SESSION['success'];
-        echo '</div>';
-        unset($_SESSION['success']);
-    }
+    // if (isset($_SESSION['success'])) {
+    //     echo '<div style="color: green; font-weight: bold; padding: 10px; background-color:#d4edda; border: 1px solid #c3e6cb; border-radius: 5px; z-index: 10; margin-top: -45px; margin-left: 240px;">';
+    //     echo $_SESSION['success'];
+    //     echo '</div>';
+    //     unset($_SESSION['success']);
+    // }
 
     ?>
 

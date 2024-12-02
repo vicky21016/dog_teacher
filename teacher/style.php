@@ -31,11 +31,11 @@ include("../css.php");
 </head>
 
 <body>
-    <?php include ("../header.php")?>
+    <?php include("../header.php") ?>
     <aside class="dasgboard-aside position-fixed vh-100 bg-gray border-end overflow-auto ">
         <ul class="list-unstyled">
             <li><a class="py-2 px-3 text-decoration-none d-block" href="">
-            <i class="fa-solid fa-house pe-2"></i>Dashboard
+                    <i class="fa-solid fa-house pe-2"></i>Dashboard
                 </a>
             </li>
             <li><a class="py-2 px-3 text-decoration-none d-block" href="pdo-users.php">
@@ -51,11 +51,7 @@ include("../css.php");
                     <i class="fa-solid fa-user pe-2 ps-1"></i>course
                 </a>
             </li>
-<<<<<<< HEAD
             <li><a class="py-2 px-3 text-decoration-none d-block" href="List.php">
-=======
-            <li><a class="py-2 px-3 text-decoration-none d-block" href="">
->>>>>>> 647c3b0c6d024a4a81fafcffc7a07e721815809e
                     <i class="fa-solid fa-user pe-2 ps-1"></i>teacher
                 </a>
             </li>
@@ -75,15 +71,17 @@ include("../css.php");
 
         <hr>
         <ul class="list-unstyled">
-       
+
             <li><a class="py-2 px-3 text-decoration-none d-block" href="">
                     <i class="fa-solid fa-right-from-bracket pe-2"></i>Sign Up
                 </a>
         </ul>
     </aside>
     <main class="main-content">
-    <?php //include("../smell-project/pdo-users.php") ?>
-    <?php //include("List.php"); ?>
+        <?php //include("../smell-project/pdo-users.php") 
+        ?>
+        <?php //include("List.php"); 
+        ?>
     </main>
 
 

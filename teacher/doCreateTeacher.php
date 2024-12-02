@@ -15,20 +15,20 @@ if (empty($name) || empty($skill) || empty($intro) || empty($exper) || empty($ca
     exit;
 }
 
-$imageName = null; 
+$imageName = null;
 if (isset($_FILES["myFile"]) && $_FILES["myFile"]["error"] == 0) {
     // 獲取檔案副檔名
     $extension = pathinfo($_FILES["myFile"]["name"], PATHINFO_EXTENSION);
     $allowed_extensions = ['jpg', 'jpeg', 'png', 'jfif', 'webp'];
 
     if (!in_array(strtolower($extension), $allowed_extensions)) {
-        $_SESSION['error'] ="不允許的檔案格式。請選擇 JPG, JPEG, PNG, JFIF 或 WEBP 格式的圖片。";
+        $_SESSION['error'] = "不允許的檔案格式。請選擇 JPG, JPEG, PNG, JFIF 或 WEBP 格式的圖片。";
         header("Location: create-teacher.php");
         exit;
     }
     $imageName  = uniqid() . '.' . $extension;
 
-    $upload_dir = '../img/'; 
+    $upload_dir = '../img/';
 
     // 確保目錄存在
     if (!is_dir($upload_dir)) {
@@ -41,7 +41,6 @@ if (isset($_FILES["myFile"]) && $_FILES["myFile"]["error"] == 0) {
         header("Location: create-teacher.php");
         exit;
     }
-
 }
 
 $sql = "INSERT INTO teacher (name, skill, Introduce, Experience, img, category_id)
@@ -59,14 +58,13 @@ if ($stmt->execute()) {
     // echo "<pre>";
     // print_r($_SESSION['success']);
     // echo "</pre>";
-    header("Location: List.php?id=$id");
+    header("Location: List.php");
     exit;
 } else {
     $_SESSION['error'] = "新增老師失敗: " . $stmt->error;
-    header("Location: create-teacher.php?id=$id");
+    header("Location: create-teacher.php");
     exit;
 }
 
 $stmt->close();
 $conn->close();
-
