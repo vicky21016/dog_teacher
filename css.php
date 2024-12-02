@@ -29,7 +29,7 @@
 
     table td:nth-child(1),
     table th:nth-child(1) {
-        min-width: 80px;
+        min-width: 65px;
         max-width: 200px;
         word-break: break-word;
         /* 自動換行 */
@@ -37,7 +37,7 @@
 
     table td:nth-child(2),
     table th:nth-child(2) {
-        min-width: 80px;
+        min-width: 150px;
         max-width: 200px;
         word-break: break-word;
     }
@@ -59,6 +59,13 @@
     table td:nth-child(5),
     table th:nth-child(5) {
         min-width: 150px;
+        max-width: 200px;
+        word-break: break-word;
+    }
+
+    table td:nth-child(6),
+    table th:nth-child(6) {
+        min-width: 450px;
         max-width: 200px;
         word-break: break-word;
     }

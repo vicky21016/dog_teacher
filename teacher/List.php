@@ -49,7 +49,11 @@ JOIN category ON teacher.category_id = category.id
 $whereClause";
 $stmtCount = $conn->prepare($sqlCount);
 if ($whereClause !== "") {
-    $stmtCount->bind_param("i", $params[0]);
+    if (!empty($search)) {
+        $stmtCount->bind_param("s", $searchTerm); // 搜尋時的條件
+    } else {
+        $stmtCount->bind_param("i", $params[0]); // 分類過濾條件
+    }
 }
 $stmtCount->execute();
 $resultCount = $stmtCount->get_result();
