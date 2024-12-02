@@ -54,14 +54,16 @@ if ($stmt === false) {
 }
 
 $stmt->bind_param("sssssi", $name, $skill, $intro, $exper, $imageName, $category_id);
-
 if ($stmt->execute()) {
     $_SESSION['success'] = "新增老師成功！";
-    header("Location: List.php");
+    // echo "<pre>";
+    // print_r($_SESSION['success']);
+    // echo "</pre>";
+    header("Location: List.php?id=$id");
     exit;
 } else {
     $_SESSION['error'] = "新增老師失敗: " . $stmt->error;
-    header("Location: create-teacher.php");
+    header("Location: create-teacher.php?id=$id");
     exit;
 }
 

@@ -1,6 +1,6 @@
 <?php
 require_once("../db_connect.php");
-// session_start();
+session_start();
 
 $cateSql = "SELECT * FROM category";
 $resultCate = $conn->query($cateSql);
@@ -32,11 +32,6 @@ $limit = 10; // 每頁顯示10筆資料
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1; // 頁碼，預設為第1頁
 $offset = ($page - 1) * $limit; // 計算偏移量
 
-$order = isset($_GET['order']) && $_GET['order'] === 'DESC' ? 'DESC' : 'ASC';  // 預設排序順序
-$allowed_columns = ['id', 'name'];  // 可排序的欄位名稱
-$sort_column = isset($_GET['sort_column']) && in_array($_GET['sort_column'], $allowed_columns) ? $_GET['sort_column'] : 'id';  // 預設排序欄位為id
-
-
 // 計算總筆數
 $sqlCount = "SELECT COUNT(*) AS total FROM teacher 
 JOIN category ON teacher.category_id = category.id
@@ -52,27 +47,19 @@ $stmtCount->close();
 
 $totalPages = ceil($totalTeachers / $limit);
 
-// $sql = "SELECT teacher.*, category.name AS category_name FROM teacher 
-// JOIN category ON teacher.category_id = category.id
-// $whereClause
-// ORDER BY teacher.id $order
-// LIMIT ? OFFSET ?
-// ";
-$sql = "SELECT * FROM teacher 
+$sql = "SELECT teacher.*, category.name AS category_name FROM teacher 
 JOIN category ON teacher.category_id = category.id
 $whereClause
-ORDER BY teacher.$sort_column $order
-LIMIT ?, ?";
+ORDER BY teacher.id $order
+LIMIT ? OFFSET ?
+";
 
 $stmt = $conn->prepare($sql);
 
-$searchTerm = "%" . $search . "%"; // 設定搜尋關鍵字
 if ($whereClause !== "") {
-    // 如果有分類過濾條件，綁定相應的參數
-    $stmt->bind_param("sii", $searchTerm, $offset, $limit);
+    $stmt->bind_param("iii", $params[0], $limit, $offset);
 } else {
-    // 如果沒有分類過濾，直接綁定搜尋關鍵字、偏移量和限制
-    $stmt->bind_param("ii", $offset, $limit);
+    $stmt->bind_param("ii", $limit, $offset);
 }
 
 $stmt->execute();
@@ -94,6 +81,14 @@ $stmt->close();
 </head>
 
 <body>
+    <?php
+    if (isset($_SESSION['success'])) {
+        echo '<div style="color: green; font-weight: bold; padding: 10px; background-color:#d4edda; border: 1px solid #c3e6cb; border-radius: 5px; margin-bottom: 15px;">';
+        echo $_SESSION['success'];
+        echo '</div>';
+        unset($_SESSION['success']);  
+    }
+    ?>
     <div class="container">
         <ul class="nav nav-underline mb-3">
             <li class="nav-item">
@@ -118,7 +113,7 @@ $stmt->close();
         </div>
         <form action="search.php" method="GET" class="mb-4">
             <div class="input-group">
-                <input type="text" class="form-control" name="search" placeholder="搜尋" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
+                <input type="search" class="form-control" name="search" placeholder="搜尋" value="<?= isset($_GET['search']) ? htmlspecialchars($_GET['search']) : '' ?>">
                 <button class="btn btn-primary" type="submit"><i class="fa-solid fa-search"></i></button>
             </div>
         </form>
@@ -137,23 +132,9 @@ $stmt->close();
                 <table class='table table-responsive'>
                     <thead>
                         <tr>
-                            <thead>
-                                <tr>
-                                    <th style="cursor: pointer;" onclick="window.location.href='List.php?sort_column=id&order=<?= $order === 'ASC' ? 'DESC' : 'ASC'; ?>&page=<?= $page ?>&search=<?= htmlspecialchars($search) ?>'">序號
-                                        <?php if ($sort_column == 'id'): ?>
-                                            <i class="fa-solid fa-caret-<?= $order === 'DESC' ? 'up' : 'down'; ?>"></i>
-                                        <?php endif; ?>
-                                    </th>
-                                    <th style="cursor: pointer;" onclick="window.location.href='List.php?sort_column=name&order=<?= $order === 'ASC' ? 'DESC' : 'ASC'; ?>&page=<?= $page ?>&search=<?= htmlspecialchars($search) ?>'">姓名
-                                        <?php if ($sort_column == 'name'): ?>
-                                            <i class="fa-solid fa-caret-<?= $order === 'DESC' ? 'up' : 'down'; ?>"></i>
-                                        <?php endif; ?>
-                                    </th>
-                                        <?php endif; ?>
-                                    </th>
-                            <!-- <th>序號</th> -->
+                            <th>序號</th>
                             <th>老師照片</th>
-                            <!-- <th>姓名</th> -->
+                            <th>姓名</th>
                             <th>類別</th>
                             <th>專長</th>
                             <th>介紹</th>
@@ -183,13 +164,13 @@ $stmt->close();
                                 </td>
                                 <td>
                                     <a href="teacher.php?id=<?= $teacher['id'] ?>" class="btn btn-success btn-sm mb-3">
-                                        <i class="fa-regular fa-eye fa-fw"></i> 檢視
+                                        <i class="fa-regular fa-eye fa-fw"></i>
                                     </a>
                                     <a href="doEdit.php?id=<?= $teacher['id'] ?>" class="btn btn-warning btn-sm mb-3">
-                                        <i class="fa-solid fa-pen-to-square fa-fw"> </i>編輯
+                                        <i class="fa-solid fa-pen-to-square fa-fw"> </i>
                                     </a>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<?= $teacher['id'] ?>">
-                                        <i class="fa-solid fa-trash fa-fw"> </i>刪除
+                                        <i class="fa-solid fa-trash fa-fw"> </i>
                                     </button>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -228,9 +209,9 @@ $stmt->close();
                 <?php endif; ?>
             </div>
 
-        <?php //else: ?>
+        <?php else: ?>
             <p>找不到符合條件的老師。</p>
-        <?php //endif; ?>
+        <?php endif; ?>
     </div>
     <?php include("../js.php"); ?>
     <script>

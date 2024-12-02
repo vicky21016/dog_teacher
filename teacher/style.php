@@ -32,7 +32,7 @@ include("../css.php");
 </head>
 
 <body>
-    <?php include ("../header1.php")?>
+    <?php include ("../header.php")?>
     <aside class="dasgboard-aside position-fixed vh-100 bg-gray border-end overflow-auto ">
         <ul class="list-unstyled">
             <li><a class="py-2 px-3 text-decoration-none d-block" href="">
@@ -52,7 +52,7 @@ include("../css.php");
                     <i class="fa-solid fa-user pe-2 ps-1"></i>course
                 </a>
             </li>
-            <li><a class="py-2 px-3 text-decoration-none d-block" href="javascript:void(0);" onclick="loadPage('List')">
+            <li><a class="py-2 px-3 text-decoration-none d-block" href="List.php">
                     <i class="fa-solid fa-user pe-2 ps-1"></i>teacher
                 </a>
             </li>
@@ -81,30 +81,12 @@ include("../css.php");
     <main class="main-content">
     <?php //include("../smell-project/pdo-users.php") ?>
     <?php //include("List.php"); ?>
-    <div id="content-area">
-            <!-- Initially, you can show a default loading message or content -->
-            <div class="loading">Loading content...</div>
-        </div>
     </main>
 
 
 
     <?php include("../js.php"); ?>
-    <script>
-        // 使用 AJAX 加載頁面內容
-        function loadPage(page) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', page + '.php', true);  // 設定請求，根據頁面名稱加載對應的 PHP 檔案
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    // 將返回的內容插入到 #content-area 中
-                    document.getElementById('content-area').innerHTML = xhr.responseText;
-                }
-            };
-            xhr.send();
-        }
-        
-    </script>
+
 </body>
 
 </html>

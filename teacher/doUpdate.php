@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // 移動檔案
         if (!move_uploaded_file($_FILES["myFile"]["tmp_name"], $upload_dir . $imageName)) {
             $_SESSION['error'] = "圖片上傳失敗，請再試一次。";
-            header("Location: create-teacher.php");
+            header("Location: create-teacher.php?id=$id");
             exit;
         }
 
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         $_SESSION['success'] = "更新成功!";
-        header("Location: List.php");
+        header("Location: List.php?id=$id");
         exit;
     } else {
         $_SESSION['error'] = "更新失敗: " . $stmt->error;

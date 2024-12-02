@@ -23,7 +23,7 @@ if (isset($_GET['id'])) {
         echo "找不到該老師資料";
         exit;
     }
-} else { 
+} else {
     echo "無效的id";
 
     exit;
@@ -40,15 +40,33 @@ if (isset($_GET['id'])) {
 </head>
 
 <body>
+    <?php include("style.php"); ?>
     <?php
     // 顯示錯誤訊息（警告）
+    // if (isset($_SESSION['error'])) {
+    // // // echo '<div style="color: red; font-weight: bold; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; margin-bottom: 15px;">';
+    // echo $_SESSION['error'];
+    // echo '</div>';
+    // unset($_SESSION['error']);  // 顯示後清除錯誤訊息
+    // }
+
     if (isset($_SESSION['error'])) {
-        echo '<div style="color: red; font-weight: bold; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; margin-bottom: 15px;">';
-        echo $_SESSION['error'];
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 16px; line-height: 1.5; z-index: 10;  margin-top:-45px; margin-left: 240px;">';
+        echo '<strong>錯誤！</strong> ' . $_SESSION['error'];
+        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
         echo '</div>';
         unset($_SESSION['error']);  // 顯示後清除錯誤訊息
     }
+    if (isset($_SESSION['success'])) {
+        echo '<div style="color: green; font-weight: bold; padding: 10px; background-color:#d4edda; border: 1px solid #c3e6cb; border-radius: 5px; z-index: 10; margin-top: -45px; margin-left: 240px;">';
+        echo $_SESSION['success'];
+        echo '</div>';
+        unset($_SESSION['success']);
+    }
+
     ?>
+
+
     <div class="container">
         <div class="py-2">
             <a href="List.php" class="btn btn-primary" title="回師資列表"><i class="fa-solid fa-left-long"></i></a>
@@ -67,7 +85,7 @@ if (isset($_GET['id'])) {
                 <select class="form-control" id="category_id" name="category_id" required>
                     <option value="" disabled selected>選擇類別</option>
                     <?php foreach ($categories as $category): ?>
-                        <option value="<?= $category['id'] ?>"<?= $category['id'] == $teacher['category_id'] ? 'selected' : '' ?>>
+                        <option value="<?= $category['id'] ?>" <?= $category['id'] == $teacher['category_id'] ? 'selected' : '' ?>>
                             <?= htmlspecialchars($category['name']) ?></option>
                     <?php endforeach; ?>
                 </select>
@@ -75,7 +93,8 @@ if (isset($_GET['id'])) {
 
             <div class="mb-3">
                 <label for="skill" class="form-label">skill</label>
-                <input type="text" class="form-control" id="skill" name="skill" value="<?= htmlspecialchars($teacher['skill']) ?>" required>
+                <textarea class="form-control" id="skill" name="skill" required><?= htmlspecialchars($teacher['skill']) ?></textarea>
+                <!-- <input type="text" class="form-control" id="skill" name="skill" value="<?= htmlspecialchars($teacher['skill']) ?>" required> -->
             </div>
 
             <div class="mb-3">
@@ -85,7 +104,8 @@ if (isset($_GET['id'])) {
 
             <div class="mb-3">
                 <label for="exper" class="form-label">Experience</label>
-                <input type="text" class="form-control" id="exper" name="exper" value="<?= htmlspecialchars($teacher['Experience']) ?>" required>
+                <textarea class="form-control" id="exper" name="exper" required><?= htmlspecialchars($teacher['Experience']) ?></textarea>
+                <!-- <input type="text" class="form-control" id="exper" name="exper" value="<?= htmlspecialchars($teacher['Experience']) ?>" required> -->
             </div>
 
             <div class="mb-3">

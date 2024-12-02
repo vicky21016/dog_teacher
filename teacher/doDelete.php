@@ -9,7 +9,7 @@ $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
     $_SESSION['success'] =  "刪除成功";
-    header("Location: List.php");
+    header("Location: List.php?id=$id");
     exit;
 } else {
     $_SESSION['error'] = "刪除失敗，請再試一次";

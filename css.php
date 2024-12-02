@@ -15,7 +15,8 @@
     }
 
     .table-container {
-        max-height: 500px;
+        max-height: 620px;
+        min-width: 1500px;
         overflow-y: auto;
         overflow-x: hidden;
     }
@@ -28,7 +29,7 @@
 
     table td:nth-child(1),
     table th:nth-child(1) {
-        min-width: 50px;
+        min-width: 80px;
         max-width: 200px;
         word-break: break-word;
         /* 自動換行 */

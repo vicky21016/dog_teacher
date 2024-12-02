@@ -27,13 +27,16 @@ if ($result->num_rows > 0) {
 </head>
 
 <body>
+    <?php include("style.php"); ?>
     <?php
     if (isset($_SESSION['error'])) {
-        echo '<div style="color: red; font-weight: bold; padding: 10px; background-color: #f8d7da; border: 1px solid #f5c6cb; border-radius: 5px; margin-bottom: 15px;">';
-        echo $_SESSION['error'];
+        echo '<div class="alert alert-danger alert-dismissible fade show" role="alert" style="font-size: 16px; line-height: 1.5; z-index: 10; margin-top: -45px; margin-left: 240px;">';
+        echo '<strong>錯誤！</strong> ' . $_SESSION['error'];
+        echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
         echo '</div>';
         unset($_SESSION['error']);  // 顯示後清除錯誤訊息
     }
+
     ?>
     <div class="container">
         <div class="py-2">
@@ -57,15 +60,18 @@ if ($result->num_rows > 0) {
             <div>
                 <div class="mb-2">
                     <label for="" class="form-label">專長</label>
-                    <input type="text" class="form-control" name="skill">
+                    <textarea class="form-control" id="skill" name="skill" required></textarea>
+                    <!-- <input type="text" class="form-control" name="skill"> -->
                 </div>
                 <div class="mb-2">
                     <label for="" class="form-label">簡介</label>
-                    <input type="text" class="form-control" name="intro">
+                    <textarea class="form-control" id="intro" name="intro" required></textarea>
+                    <!-- <input type="text" class="form-control" name="intro"> -->
                 </div>
                 <div class="mb-2">
                     <label for="" class="form-label">經歷</label>
-                    <input type="text" class="form-control" name="exper">
+                    <textarea class="form-control" id="exper" name="exper" required></textarea>
+                    <!-- <input type="text" class="form-control" name="exper"> -->
                 </div>
                 <div class="mb-2">
                     <label for="" class="form-label">選擇圖片檔案</label>
